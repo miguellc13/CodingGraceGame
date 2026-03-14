@@ -480,6 +480,44 @@ def get_player_name(player_info_arg):
 
     return player_info_arg
 
+def gold_gauntlet_room(player_info_arg):
+
+    print("\n=== THE GOLD ROOM ===")
+    print("You step into pitch darkness. The door slams shut behind you.")
+    print("A mechanical voice booms: 'WELCOME TO THE GAUNTLET.'")
+    print("Blades begin spinning from the walls. You have one second to act.")
+    print("\nDo you: [duck | run | freeze]")
+
+    player_info_arg["location"] = "Gold Room"
+    player_info_arg["health"] -= 20
+
+    item = "Gold Cloak"
+    if item not in player_info_arg["inventory"]:
+        player_info_arg["inventory"].append(item)
+        print("Amidst the chaos, you grab a Gold Cloak from the wall!")
+
+    player_info_arg["choices"].append("Gold Room")
+
+    show_player_info(player_info_arg)
+
+    action = input("> ").strip().lower()
+
+    if action == "duck":
+        you_won("You duck just in time! The blades slice the air above your head. "
+                "A hidden exit opens in the floor — you crawl to freedom!")
+    elif action == "run":
+        you_died("You sprint forward — straight into a spinning blade. "
+                 "The gauntlet claims another victim.")
+    elif action == "freeze":
+        you_died("You freeze in panic. The blades find you instantly. "
+                 "The darkness swallows you whole.")
+    elif "flee" in action:
+        return "flee"
+    else:
+        you_died("Hesitation is death. The gauntlet shows no mercy.")
+
+
+
 
 def start_new_adventure(player_info_arg):
     """Presents the three-door choice and routes to the selected room.
