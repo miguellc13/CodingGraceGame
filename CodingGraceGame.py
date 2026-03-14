@@ -484,7 +484,7 @@ def gold_gauntlet_room(player_info_arg):
 
     print("\n=== THE GOLD ROOM ===")
     print("You step into pitch darkness. The door slams shut behind you.")
-    print("A mechanical voice booms: 'WELCOME TO THE GAUNTLET.'")
+    print("A loud voice echoes: 'WELCOME TO YOUR NIGHTMARE.'")
     print("Blades begin spinning from the walls. You have one second to act.")
     print("\nDo you: [duck | run | freeze]")
 
@@ -526,12 +526,12 @@ def ash_corridor_room(player_info_arg):
     print("\nWhich door do you choose? [left | center | right | flee]")
 
     player_info_arg["location"] = "Ash Room"
-    player_info_arg["health"] -= 15
+    player_info_arg["health"] -= 0
 
-    item = "Ash Pendant"
+    item = "Flashlight"
     if item not in player_info_arg["inventory"]:
         player_info_arg["inventory"].append(item)
-        print("You find an Ash Pendant half-buried in the floor. You pocket it.")
+        print("You find a flashlight k half-buried in the floor. You pocket it.")
 
     player_info_arg["choices"].append("Ash Room")
 
