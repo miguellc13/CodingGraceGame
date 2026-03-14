@@ -515,6 +515,43 @@ def gold_gauntlet_room(player_info_arg):
         return "flee"
     else:
         you_died("Hesitation is death. The gauntlet shows no mercy.")
+        
+def ash_corridor_room(player_info_arg):
+
+    print("\n=== THE ASH ROOM ===")
+    print("You enter a long corridor choked with ash and silence.")
+    print("Three charred doors stand before you, each identical.")
+    print("Something scratches behind two of them.")
+    print("Only one door leads forward. The others lead to... something else.")
+    print("\nWhich door do you choose? [left | center | right | flee]")
+
+    player_info_arg["location"] = "Ash Room"
+    player_info_arg["health"] -= 15
+
+    item = "Ash Pendant"
+    if item not in player_info_arg["inventory"]:
+        player_info_arg["inventory"].append(item)
+        print("You find an Ash Pendant half-buried in the floor. You pocket it.")
+
+    player_info_arg["choices"].append("Ash Room")
+
+    show_player_info(player_info_arg)
+
+    SAFE_DOOR = "center"
+
+    direction = input("> ").strip().lower()
+
+    if direction == SAFE_DOOR:
+        print("The center door swings open silently. Cold air rushes past you.")
+        print("You walk through into dim light. You made it.")
+        return player_info_arg
+    elif "flee" in direction:
+        return "flee"
+    elif direction in ["left", "right"]:
+        you_died("The door flies open. Something massive lunges at you from the dark. "
+                 "Your screams echo through the ash corridor... then silence.")
+    else:
+        you_died("You wander aimlessly through the ash. The corridor collapses around you.")
 
 
 
