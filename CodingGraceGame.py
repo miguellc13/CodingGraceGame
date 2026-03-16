@@ -555,7 +555,7 @@ def ash_corridor_room(player_info_arg):
 
     def purple_room(player_info_arg):
 
-    print("\n=== PURPLE ROOM ===")
+     print("\n=== PURPLE ROOM ===")
     print("You enter a mysterious purple chamber.")
 
     # Update player state
@@ -599,32 +599,33 @@ def start_new_adventure(player_info_arg):
         player_info_arg: The player state dictionary.
     """
 
-    while True:
+    def start_new_adventure(player_info_arg):
+     while True:
         print_new_dungeon()
-        print("You enter a room, and you see a red door to your left "
-              "and blue and green doors to your right.")
-        door_picked = input("Do you pick the red door, blue door, "
-                            "or green door? > ")
-
-        # We compare only the first few characters so that inputs like
-        # "red door", "blue", or "green one" all work.
+        print("You see six doors: red, blue, green, gold, ash, and purple.")
+        door_picked = input("Which door do you choose? > ")
         door = door_picked.strip().lower()
 
-        if door.startswith("red"):
+        # Original three rooms 
+        if door.startswith('red'):
             room_result = painful_truth_of_reality_room(player_info_arg)
-        elif door.startswith("blue"):
+        elif door.startswith('blue'):
             room_result = blissful_ignorance_of_illusion_room(player_info_arg)
-        elif door.startswith("green"):
+        elif door.startswith('green'):
             room_result = green_magic_room(player_info_arg)
+
+        # New rooms
+        elif door.startswith('gold'):
+            room_result = gold_gauntlet_room(player_info_arg)
+        elif door.startswith('ash'):
+            room_result = ash_corridor_room(player_info_arg)
+        elif door.startswith('purple'):
+            room_result = purple_room(player_info_arg)
         else:
-            print("Sorry, it's either 'red', 'blue', or 'green' as the "
-                  "answer. You're the weakest link, goodbye!")
-            # Continue the loop so the player can try again.
+            print('Please enter one of the six door names.')
             continue
 
-        # If the room returned "flee", we loop back to the door choice.
-        # If it returned normally (Blue Room after the guard), we break out.
-        if room_result != "flee":
+        if room_result != 'flee':
             break
 
     return player_info_arg
