@@ -392,29 +392,7 @@ def painful_truth_of_reality_room(player_info_arg):
     else:
         you_died("You died. Well, that was tasty!")
 
-def purple_room(player_info_arg):
 
-    print("\n=== PURPLE ROOM ===")
-    print("You enter a mysterious purple chamber.")
-
-    # Update player state
-    player_info_arg["location"] = "Purple Room"
-
-    item = "Purple Orb"
-    if item not in player_info_arg["inventory"]:
-        player_info_arg["inventory"].append(item)
-        print("You found a Purple Orb!")
-
-    player_info_arg["choices"].append("Purple Room")
-
-    show_player_info(player_info_arg)
-
-    move = input("> ").lower()
-
-    if "flee" in move:
-        return "flee"
-    else:
-        you_died("The purple magic overwhelms you.")
 
 def green_magic_room(player_info_arg):
     """The Green Room: play Rock, Paper, Scissors against a magician.
@@ -573,7 +551,32 @@ def ash_corridor_room(player_info_arg):
     elif direction in ["left", "right"]:
         you_died("The door flies open. A dark shodow figure launches at you. You have no chance to react.")
     else:
-        you_died("You wander aimlessly through the ash and smoked filled room. The walls collapse onto you.")
+        you_died("You wander aimlessly through the ash and smoked filled room. The walls collapse onto you.")\
+
+    def purple_room(player_info_arg):
+
+    print("\n=== PURPLE ROOM ===")
+    print("You enter a mysterious purple chamber.")
+
+    # Update player state
+    player_info_arg["location"] = "Purple Room"
+
+    item = "Purple Orb"
+    if item not in player_info_arg["inventory"]:
+        player_info_arg["inventory"].append(item)
+        print("You found a Purple Orb!")
+
+    player_info_arg["choices"].append("Purple Room")
+
+    show_player_info(player_info_arg)
+
+    move = input("> ").lower()
+
+    if "flee" in move:
+        return "flee"
+    else:
+        you_died("The purple magic overwhelms you.")
+
 
 
 
