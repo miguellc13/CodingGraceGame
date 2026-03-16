@@ -392,6 +392,30 @@ def painful_truth_of_reality_room(player_info_arg):
     else:
         you_died("You died. Well, that was tasty!")
 
+def blue_room(player_info_arg):
+
+    print("\n=== BLUE ROOM ===")
+    print("You enter a calm blue chamber glowing softly.")
+
+    # Update player state
+    player_info_arg["location"] = "Blue Room"
+
+    item = "Blue Crystal"
+    if item not in player_info_arg["inventory"]:
+        player_info_arg["inventory"].append(item)
+        print("You found a Blue Crystal!")
+
+    player_info_arg["choices"].append("Blue Room")
+
+    show_player_info(player_info_arg)
+
+    move = input("> ").lower()
+
+    if "flee" in move:
+        return "flee"
+    else:
+        you_died("The blue room traps you forever.")
+
 
 def green_magic_room(player_info_arg):
     """The Green Room: play Rock, Paper, Scissors against a magician.
