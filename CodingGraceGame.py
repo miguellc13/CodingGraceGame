@@ -582,38 +582,19 @@ def ash_corridor_room(player_info_arg):
 
 
 def start_new_adventure(player_info_arg):
-    """Presents the three-door choice and routes to the selected room.
-
-    A while-loop drives the game flow: each iteration shows the dungeon,
-    asks the player to pick a door, and dispatches to the corresponding
-    room function.  If the room returns the string "flee", the loop
-    continues and the doors are presented again.  If the room completes
-    normally (or raises GameOver), the loop ends.
-
-    Using a loop rather than recursion is important here.  If each flee
-    called start_new_adventure() again, every cycle would add a new frame
-    to the call stack, and after enough cycles Python would raise a
-    RecursionError.
-
-    Args:
-        player_info_arg: The player state dictionary.
-    """
-
-    def start_new_adventure(player_info_arg):
-     while True:
+    """Presents the six-door choice and routes to the selected room."""
+    while True:
         print_new_dungeon()
         print("You see six doors: red, blue, green, gold, ash, and purple.")
         door_picked = input("Which door do you choose? > ")
         door = door_picked.strip().lower()
-
-        # Original three rooms 
+        # Original three rooms
         if door.startswith('red'):
             room_result = painful_truth_of_reality_room(player_info_arg)
         elif door.startswith('blue'):
             room_result = blissful_ignorance_of_illusion_room(player_info_arg)
         elif door.startswith('green'):
             room_result = green_magic_room(player_info_arg)
-
         # New rooms
         elif door.startswith('gold'):
             room_result = gold_gauntlet_room(player_info_arg)
@@ -624,12 +605,9 @@ def start_new_adventure(player_info_arg):
         else:
             print('Please enter one of the six door names.')
             continue
-
         if room_result != 'flee':
             break
-
     return player_info_arg
-
 
 def main(player_info_main):
     """Main entry point: greets the player, runs the adventure, says goodbye.
