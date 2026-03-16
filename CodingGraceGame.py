@@ -483,18 +483,18 @@ def get_player_name(player_info_arg):
 def gold_gauntlet_room(player_info_arg):
 
     print("\n=== THE GOLD ROOM ===")
-    print("You step into pitch darkness. The door slams shut behind you.")
+    print("You step into a dark room. The door slams shut.")
     print("A loud voice echoes: 'WELCOME TO YOUR NIGHTMARE.'")
-    print("Blades begin spinning from the walls. You have one second to act.")
-    print("\nDo you: [duck | run | freeze]")
+    print("Sharp object begin getting thrown at you.")
+    print("\nDo you: [duck | run | stand still]")
 
     player_info_arg["location"] = "Gold Room"
     player_info_arg["health"] -= 20
 
-    item = "Gold Cloak"
+    item = "Gold Shield"
     if item not in player_info_arg["inventory"]:
         player_info_arg["inventory"].append(item)
-        print("Amidst the chaos, you grab a Gold Cloak from the wall!")
+        print("Amidst the chaos, you find an iron Shield hidden in the room!")
 
     player_info_arg["choices"].append("Gold Room")
 
@@ -503,14 +503,14 @@ def gold_gauntlet_room(player_info_arg):
     action = input("> ").strip().lower()
 
     if action == "duck":
-        you_won("You duck just in time! The blades slice the air above your head. "
-                "A hidden exit opens in the floor — you crawl to freedom!")
+        you_won("You duck just in time! The weapons just barely miss you. "
+                "A hidden trap door opens in the floor, you crawl to freedom!")
     elif action == "run":
-        you_died("You sprint forward — straight into a spinning blade. "
-                 "The gauntlet claims another victim.")
+        you_died("You run forward and immediately get hit by a laser!" 
+                 "The dangerous room claims another victim.")
     elif action == "freeze":
         you_died("You freeze in panic. The blades find you instantly. "
-                 "The darkness swallows you whole.")
+                 "You have no where to run.")
     elif "flee" in action:
         return "flee"
     else:
@@ -519,10 +519,10 @@ def gold_gauntlet_room(player_info_arg):
 def ash_corridor_room(player_info_arg):
 
     print("\n=== THE ASH ROOM ===")
-    print("You enter a long corridor choked with ash and silence.")
-    print("Three charred doors stand before you, each identical.")
-    print("Something scratches behind two of them.")
-    print("Only one door leads forward. The others lead to... something else.")
+    print("You enter a mysterious room full of ash and darkness.")
+    print("Three identical doors stand in front of you.")
+    print("You don't see it, but can feel that there is someting waiting for you behind those doors.")
+    print("Only one door is safe. The others lead to... ?.")
     print("\nWhich door do you choose? [left | center | right | flee]")
 
     player_info_arg["location"] = "Ash Room"
@@ -531,7 +531,7 @@ def ash_corridor_room(player_info_arg):
     item = "Flashlight"
     if item not in player_info_arg["inventory"]:
         player_info_arg["inventory"].append(item)
-        print("You find a flashlight k half-buried in the floor. You pocket it.")
+        print("You find a flashlight half-buried in the floor. You pocket it.")
 
     player_info_arg["choices"].append("Ash Room")
 
@@ -542,16 +542,15 @@ def ash_corridor_room(player_info_arg):
     direction = input("> ").strip().lower()
 
     if direction == SAFE_DOOR:
-        print("The center door swings open silently. Cold air rushes past you.")
-        print("You walk through into dim light. You made it.")
+        print("The center door swings open silently. All you see a bright light.")
+        print("You walk through into who knows what. You made it.")
         return player_info_arg
     elif "flee" in direction:
         return "flee"
     elif direction in ["left", "right"]:
-        you_died("The door flies open. Something massive lunges at you from the dark. "
-                 "Your screams echo through the ash corridor... then silence.")
+        you_died("The door flies open. A dark shodow figure launches at you. You have no chance to react.")
     else:
-        you_died("You wander aimlessly through the ash. The corridor collapses around you.")
+        you_died("You wander aimlessly through the ash and smoked filled room. The walls collapse onto you.")
 
 
 
